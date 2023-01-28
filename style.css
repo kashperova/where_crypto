@@ -57,8 +57,8 @@ img{
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 120px 100px 250px #000000 , inset -120px -100px 250px #000000;
+
+   
 }
 
 .showcase-top{
@@ -68,10 +68,9 @@ img{
 }
 
 .showcase-top img{
-    width: 140px;
+    width: 200px;
     position: absolute;
     top: 50%;
-    left: 0;
     transform: translate(40% , -50%);
 }
 
@@ -84,28 +83,29 @@ img{
 
 .showcase-content{
     position: relative;
-    margin: 0 26%;
+    margin: 0 20%;
     z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     align-items: center;
-    margin-top: 9rem;
 }
 
 .showcase-content h1{
     font-weight: 700;
-    font-size: 64px;
+    font-size: 44px;
     margin: 0 30px;
     max-width: 800px;
     line-height: 74.5px;
+    padding-bottom: 15px;
 }
 
 .showcase-content h3{
     color: white;
     font-size: 25px;
-    margin: 16px 0;
+    margin: 15px 0;
+    padding-top: 30px;
 }
 
 .showcase-content p{
@@ -115,38 +115,47 @@ img{
     padding-bottom: 1rem;
 }
 
-.showcase-content input{
-    position: absolute;
+
+.country {
+    margin-top: 50px;
+}
+.countrytext {
+    position: relative;
+    display: flex;
     left: 0;
-    bottom: -8vh;
-    width: 454px;
-    height: 3rem;
-    font-size: 1rem;
-    padding-left: 0.5rem;
+    width: 1000px;
+    padding-left: 20px;
+    justify-content: center;
+    align-items: center;
+     
+}
+.countrytext input {
+    vertical-align: middle;
+    padding-left: 10px;
+    width: 470px;
+    height: 35px;
 }
 
-.btn{
+
+button{
     display: inline-block;
     background: var(--primary-color);
     color: white;
-    padding: 0.5rem 1.2rem;
+    padding: 0.6rem 1.2rem;
     font-size: 1rem;
     text-align: center;
     border: none;
     cursor: pointer;
     border-radius: 2px;
     margin-right: 0.5rem;
-    outline: none;
+    
     box-shadow: 0 5px 3px rgba(0, 0, 0, 0.45);
 }
 
-.btn:hover{
+button:hover{
     opacity: 0.9;
 }
 
-.btn-rounded{
-    border-radius: 5px;
-}
 
 .showcase-content .btn-lg{
     position: absolute;
@@ -159,108 +168,7 @@ img{
     width: 14rem;
 }
 
-.card-0 , 
-.card-1,
-.card-2,
-.card-3{
-    border-top: 8px rgb(69, 69, 69) solid;
-    padding: 50px;
-}
 
-.card-0{
-    position: relative;
-    display: inline-grid;
-    grid-template-columns: 40% 50%;
-    text-align: left;
-    align-items: center;
-    padding: 25px 45px 50px;
-}
-
-.desc-0{
-    padding-left: 100px;
-}
-
-.card-1{
-    position: relative;
-    display: inline-grid;
-    grid-template-columns: 50% 40%;
-    text-align: left;
-    align-items: center;
-    padding: 25px 45px 50px;
-}
-
-.desc-1{
-    padding-left: 80px;
-}
-
-.style-cards h1{
-    font-size: 3rem;
-    padding: 1rem;
-    padding-left: 0;
-}
-
-.style-cards h3{
-    font-size: 1.6rem;
-    line-height: 2rem;
-}
-
-.card-1 video{
-    position: relative;
-    width: 100%;
-    height: 54%;
-    grid-column: 2/2;
-    grid-row: 1/2;
-    z-index: -1;
-}
-
-.card-1 img{
-    grid-column: 2/2;
-    grid-row: 1/2;
-}
-
-.card-2{
-    position: relative;
-    display: inline-grid;
-    grid-template-columns: 40% 50%;
-    text-align: left;
-    align-items: center;
-    padding: 25px 45px 50px;
-}
-
-.desc-2{
-    padding-left: 100px;
-}
-
-.card-3{
-    position: relative;
-    display: inline-grid;
-    grid-template-columns: 50% 40%;
-    text-align: left;
-    align-items: center;
-    padding: 25px 45px 50px;
-}
-
-.desc-3{
-    padding-left: 80px;
-    padding-right: 20px;
-}
-
-.card-3 img{
-    width: 110%;
-    grid-column: 2/2;
-    grid-row: 1/2;
-}
-
-.card-3 video{
-    position: relative;
-    top: -87px;
-    left: 125px;
-    width: 65%;
-    height: 78%;
-    grid-column: 2/2;
-    grid-row: 1/2;
-    z-index: -1;
-}
 
 .faq{
     text-align: center;
@@ -320,8 +228,9 @@ img{
 
 .footer{
     max-width: 70%;
-    margin: 1rem auto;
+    margin: 0rem auto;
     overflow: auto;
+    margin-top: 14rem;
 }
 
 .footer ,
