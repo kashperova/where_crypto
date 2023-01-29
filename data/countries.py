@@ -2,6 +2,7 @@ import pycountry
 import pandas as pd
 import sqlite3
 
+
 cnts = pycountry.countries
 all_countries_name = []
 all_countries_off_name = []

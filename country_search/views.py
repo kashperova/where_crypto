@@ -4,50 +4,30 @@ import sqlite3
 import altair as alt
 import pandas as pd
 import pycountry
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
 from data.countries import all_countries_code_name, all_countries_off_name, all_countries_name, countries_dfrm
 from data.crypto_map import merge
+import altair_saver
 
 conn = sqlite3.connect('../database.db')
 c = conn.cursor()
 
 
-# def create_map(country):
-#     alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
-#     chart = alt.Chart(merge[(merge["Country or territory"] == country)]).mark_geoshape().encode(
-#         color=alt.Color('Legality', scale=alt.Scale(scheme='accent'))
-#     ).properties(
-#         width=900,
-#         height=500
-#     ).configure_legend(labelLimit=0)
-#     chart = chart.configure(background='black')
-#     chart = chart.configure_legend(labelLimit=0, labelColor='white')
-#     current = os.getcwd()
-#     chart.save(current + '/country.png')
-
 def home(request):
     return render(request, 'index.html')
+
+
+def home_page_return(request):
+    return redirect('/')
 
 
 def get_info(request):
     country = request.GET.get('selected_country', 0)
     country = country[10:]
-    # removing_files = glob.glob('../static/images/*.png')
-    # for i in removing_files:
-    #     if i == "country.png":
-    #         os.remove(i)
-    #     alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
-    chart = alt.Chart(merge[(merge["Country or territory"] == country)]).mark_geoshape().encode(
-            color=alt.Color('Legality', scale=alt.Scale(scheme='accent'))
-        ).properties(
-            width=900,
-            height=500
-        ).configure_legend(labelLimit=0)
-    chart = chart.configure(background='black')
-    chart = chart.configure_legend(labelLimit=0, labelColor='white')
-
-    return render(request, 'get_info.html', {'country': chart.interactive()})
-
+    chart = str(country) + '.png'
+    legality = str(merge[(merge["Country or territory"] == country)].Legality.values[0])
+    return render(request, 'get_info.html', {'chart': chart, 'legality': legality, 'country': country})
 
 
 def search(request):

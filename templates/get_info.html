@@ -6,23 +6,30 @@
     <title>WhereCrypto</title>
     {% load static %}
     <link rel= "stylesheet" type="text/css" href="{% static 'style/style.css' %}">
-    <script src="https://cdn.jsdelivr.net/npm//vega@3.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm//vega-lite@2.4.1"></script>
-    <script src="https://cdn.jsdelivr.net/npm//vega-embed@3.0"></script>
+<script src="https://cdn.jsdelivr.net/npm//vega@3.2"></script>
+<script src="https://cdn.jsdelivr.net/npm//vega-lite@2.4.1"></script>
+<script src="https://cdn.jsdelivr.net/npm//vega-embed@3.0"></script>
 </head>
 <body>
+
     <header class="showcase">
     <div class="showcase-top">
         <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
-        <a href="index.html">Home</a>
+        <a href="{% url 'home_page_return' %}">Home</a>
     </div>
         <div class="showcase-content">
-            <h3></h3>
-            {% load django_altair %}
-            <div class="information">
-                {% render_chart country %}
-{#                <img src="{% static 'images/country.png' %}" alt="">#}
+            <h3>{{ country }}</h3>
+            <div class="information_map">
+                <img src="../static/images/countries/{{ chart }}" alt="" align="left" width="450" height="400">
             </div>
+            <div class="information_text">
+                <h4>Current Legacy status</h4>
+                <p>{{ legality }}</p>
+                <h4>Predicted status as national currency</h4>
+            </div>
+            {% if country == "Ukraine" %}
+
+            {% endif %}
         </div>
     </header>
     <footer class="footer">

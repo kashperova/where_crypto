@@ -4,6 +4,8 @@ import pandas as pd
 import pycountry
 import altair as alt
 import geopandas
+
+
 # from altair_saver import save
 # import lxml
 
@@ -82,13 +84,13 @@ for i in range(len(country_list)):
     elif country_list[i] == "Taiwan":
         country_list[i] = "Taiwan, Province of China"
     elif country_list[i] == "Vietnam":
-        country_list[i] =  "Viet Nam"
+        country_list[i] = "Viet Nam"
     elif country_list[i] == "Brunei":
-        country_list[i] =  "Brunei Darussalam"
+        country_list[i] = "Brunei Darussalam"
     elif country_list[i] == "Czech Republic":
-        country_list[i] =  "Czechia"
+        country_list[i] = "Czechia"
     elif country_list[i] == "Russia":
-        country_list[i] =  "Russian Federation"
+        country_list[i] = "Russian Federation"
 
 misssed_countires = []
 misssed_countires = list(set(all_countries) - set(country_list))
@@ -97,30 +99,59 @@ status_by_country['Country or territory'] = country_list
 unknown_countires = {"Country or territory": misssed_countires,
                      "Legality": ["Unknown" for i in range(len(misssed_countires))]}
 unknown_countires['CODE'] = alpha3code(unknown_countires["Country or territory"])
-status_by_country['CODE']=alpha3code(status_by_country["Country or territory"])
+status_by_country['CODE'] = alpha3code(status_by_country["Country or territory"])
 
 df2 = pd.DataFrame.from_dict(unknown_countires)
 status_by_country = pd.concat([status_by_country, df2], axis=0, ignore_index=True)
 
+status_by_country.iloc[69][1] = "Illegal"
+status_by_country.iloc[66][1] = "Illegal"
+
+# status_by_country['Legality'].replace(['Legal / Banking ban',
+#        'Legal / Use discouraged by central bank',
+#        'Not considered currency', 'Not regulated',
+#        'Legal to trade and hold / Illegal as a payment tool, banking ban',
+#        'Ban on mining', 'Legal / Illegal to buy with local currency'],
+#                                  "Legal", inplace=True)
+
 
 world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
-world.columns=['pop_est', 'continent', 'name', 'CODE', 'gdp_md_est', 'geometry']
+world.columns = ['pop_est', 'continent', 'name', 'CODE', 'gdp_md_est', 'geometry']
 merge = pd.merge(world, status_by_country, on='CODE')
 
-location=pd.read_csv('https://raw.githubusercontent.com/melanieshi0120/COVID-19_global_time_series_panel_data/master/data/countries_latitude_longitude.csv')
+location = pd.read_csv(
+    'https://raw.githubusercontent.com/melanieshi0120/COVID-19_global_time_series_panel_data/master/data/countries_latitude_longitude.csv')
 merge = merge.merge(location, on='name').sort_values(by='Legality', ascending=False).reset_index()
 
 
+alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
 
-
-# alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
 # world_map = alt.Chart(merge).mark_geoshape(
 # ).encode(
-#     color = alt.Color('Legality', scale=alt.Scale(scheme='paired'))
+#     color = alt.Color('Legality', scale=alt.Scale(scheme='lightgreyred'))
 # ).properties(
-#     width=900,
-#     height=500
+#     width=1000,
+#     height=600
 # ).configure_legend(labelLimit=0, labelColor='white').configure_title(fontSize=14).configure(background='black')
-# world_map = world_map.configure_legend(labelLimit=0, labelColor='white')
 #
+# world_map = world_map.configure_legend(labelLimit=0, labelColor='white')
 # world_map.save('../static/images/world_map.png')
+
+
+# def visualize_all_maps():
+#     countries = pycountry.countries
+#     for c in countries:
+#         alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
+#         chart = alt.Chart(merge[(merge["Country or territory"] == c.name)]).mark_geoshape().encode(
+#             color=alt.Color('Legality', scale=alt.Scale(scheme='accent'))
+#         ).properties(
+#             width=900,
+#             height=500
+#         ).configure_legend(labelLimit=0)
+#         chart = chart.configure(background='black')
+#         chart = chart.configure_legend(labelLimit=0, labelColor='white')
+#         img_filename = '../static/images/countries/' + c.name + '.png'
+#         chart.save(img_filename)
+#
+#
+# visualize_all_maps()
