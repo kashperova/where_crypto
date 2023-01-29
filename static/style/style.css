@@ -256,3 +256,87 @@ button:hover{
 .footer li{
     line-height: 2.4;
 }
+
+.faq{
+    text-align: center;
+}
+
+.faq h1{
+    padding-bottom: 40px;
+    font-size: 3rem;
+}
+
+.questions{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 40%;
+    align-items: center;
+}
+
+.questions li{
+    padding: 20px 30px;
+    margin: 5px;
+    font-size: 1.6rem;
+    background-color: #303030;
+    color: white;
+    text-align: left;
+    width: 50%;
+}
+
+.faq p{
+    padding-top: 60px;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+.input{
+    display: inline-grid;
+    align-items: center;
+    grid-template-columns: 50% 40%;
+}
+
+.input input{
+    width: 600px;
+    height: 3rem;
+}
+
+.input button{
+    height: 3.25rem;
+    width: 320px;
+    left: 20px;
+    text-align: center;
+    background-color: var(--primary-color);
+    font-size: 1.5rem;
+    padding: 15px 32px;
+    border: none;
+    border-radius: 2px;
+    color: white;
+}
+
+.footer{
+    max-width: 70%;
+    margin: 0rem auto;
+    overflow: auto;
+    margin-top: 10rem;
+    position: static;
+}
+
+.footer ,
+.footer a{
+    color: #999999;
+    font-size: 0.9rem;
+}
+
+.footer p{
+    margin-bottom: 2rem;
+}
+
+.footer .footer-cols{
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    grid-gap: 2rem;
+}
+
+.footer li{
+    line-height: 2.4;
+}
