@@ -138,9 +138,14 @@ img{
 
 .home {
     margin-right: 25px;
+    transition: 0.3s;
+}
+.home:hover {
+    color:#303030;
+
 }
 
-button{
+.btn{
     display: inline-block;
     background: var(--primary-color);
     color: white;
@@ -155,7 +160,7 @@ button{
     box-shadow: 0 5px 3px rgba(0, 0, 0, 0.45);
 }
 
-button:hover{
+.btn:hover{
     opacity: 0.9;
 }
 
@@ -231,11 +236,21 @@ button:hover{
 
 .footer{
     max-width: 70%;
-    margin: 0rem auto;
-    overflow: auto;
-    margin-top: 10rem;
-    position: static;
+    margin: auto;
+    margin-top: 100px;
+
+    
+    
 }
+section {
+    display: grid;
+    place-items: center;
+}
+
+
+
+
+
 
 .footer ,
 .footer a{
@@ -247,10 +262,10 @@ button:hover{
     margin-bottom: 2rem;
 }
 
-.footer .footer-cols{
+.footer-cols{
     display: grid;
     grid-template-columns: repeat(4 , 1fr);
-    grid-gap: 2rem;
+    grid-gap: 5rem;
 }
 
 .footer li{

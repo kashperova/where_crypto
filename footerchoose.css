@@ -1,0 +1,26 @@
+.footer{
+    max-width: 70%;
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+}
+
+.chooseop {
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    margin-bottom: 5px; 
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.45);
+    transition: 0.7s;
+}
+.chooseop:hover {
+    background-color: white;
+    color: black;
+    padding: 10px 35px;
+}
