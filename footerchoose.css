@@ -15,12 +15,12 @@
     border: none;
     cursor: pointer;
     border-radius: 2px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
+    padding: 10px 25px; 
     box-shadow: 0 5px 3px rgba(0, 0, 0, 0.45);
     transition: 0.7s;
 }
 .chooseop:hover {
     background-color: white;
     color: black;
-    padding: 10px 35px;
 }
