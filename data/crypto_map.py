@@ -4,8 +4,6 @@ import pandas as pd
 import pycountry
 import altair as alt
 import geopandas
-
-
 # from altair_saver import save
 # import lxml
 
@@ -104,9 +102,9 @@ status_by_country['CODE'] = alpha3code(status_by_country["Country or territory"]
 df2 = pd.DataFrame.from_dict(unknown_countires)
 status_by_country = pd.concat([status_by_country, df2], axis=0, ignore_index=True)
 
-status_by_country.iloc[69][1] = "Illegal"
-status_by_country.iloc[66][1] = "Illegal"
-
+status_by_country.at[69, 'Legality'] = "Illegal"
+status_by_country.at[66, 'Legality'] = "Illegal"
+#
 # status_by_country['Legality'].replace(['Legal / Banking ban',
 #        'Legal / Use discouraged by central bank',
 #        'Not considered currency', 'Not regulated',
@@ -123,12 +121,23 @@ location = pd.read_csv(
     'https://raw.githubusercontent.com/melanieshi0120/COVID-19_global_time_series_panel_data/master/data/countries_latitude_longitude.csv')
 merge = merge.merge(location, on='name').sort_values(by='Legality', ascending=False).reset_index()
 
-
-alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
-
+#
+# def my_theme():
+#     return {
+#         'config': {
+#             'range': {'category': ['#8200ff', '#ca27ff', "#ffffff", "#808080"]}
+#         }
+#     }
+#
+#
+# alt.themes.register('my_theme', my_theme)
+# alt.themes.enable('my_theme')
+#
+# alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
+#
 # world_map = alt.Chart(merge).mark_geoshape(
 # ).encode(
-#     color = alt.Color('Legality', scale=alt.Scale(scheme='lightgreyred'))
+#     color='Legality:N'
 # ).properties(
 #     width=1000,
 #     height=600
@@ -138,12 +147,24 @@ alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
 # world_map.save('../static/images/world_map.png')
 
 
+# def my_theme_updated():
+#     return {
+#         'config': {
+#             'range': {'category': ['#ca27ff']}
+#         }
+#     }
+#
+
+# alt.themes.register('my_theme_updated', my_theme_updated)
+# alt.themes.enable('my_theme_updated')
+#
+#
 # def visualize_all_maps():
 #     countries = pycountry.countries
 #     for c in countries:
 #         alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
 #         chart = alt.Chart(merge[(merge["Country or territory"] == c.name)]).mark_geoshape().encode(
-#             color=alt.Color('Legality', scale=alt.Scale(scheme='accent'))
+#             color='Legality:N'
 #         ).properties(
 #             width=900,
 #             height=500
@@ -155,3 +176,40 @@ alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
 #
 #
 # visualize_all_maps()
+
+#
+# alt.themes.register('my_theme', my_theme)
+# alt.themes.enable('my_theme')
+#
+#
+# def visualize_all_pie_charts():
+#     from random import randrange
+#     countries = pycountry.countries
+#     for c in countries:
+#         alt.renderers.enable('altair_saver', fmts=['vega-lite', 'png'])
+#         bitcoin = randrange(35, 46)
+#         ethereum = randrange((100 - bitcoin)-40)
+#         tether = randrange((100 - bitcoin-ethereum)-20)
+#         others = 100 - (bitcoin+tether+ethereum)
+#         columns = ["Bitcoin", "Ethereum", "Tether", "Others"]
+#         values = [bitcoin, ethereum, tether, others]
+#         info_dict = {"Crypto": columns, "Amount": values}
+#         info_dfrm = pd.DataFrame.from_dict(info_dict)
+#         info_dfrm["Amount"] = info_dfrm["Amount"].apply(lambda i: i / 100)
+#         legacy_chart_pie = alt.Chart(info_dfrm).encode(
+#             theta=alt.Theta("Amount:Q", stack=True),
+#             radius=alt.Radius("Amount", scale=alt.Scale(type="sqrt", zero=True, rangeMin=80)),
+#             color="Crypto:N"
+#         )
+#         c1 = legacy_chart_pie.mark_arc(innerRadius=20, stroke="#fff")
+#         c2 = legacy_chart_pie.mark_text(radiusOffset=15).encode(text=alt.Text('Amount:Q', format='.0%'))
+#         img_filename = '../static/images/pie_crypto_charts/' + c.name + '.png'
+#         chart = alt.layer(c1, c2).configure_view(
+#             stroke='transparent'
+#         ).configure_axis(
+#             domainWidth=0.8
+#         ).configure(background='black').configure_legend(labelLimit=0, labelColor='white')
+#         chart.save(img_filename)
+#
+#
+# visualize_all_pie_charts()

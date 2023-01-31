@@ -11,54 +11,59 @@
 <script src="https://cdn.jsdelivr.net/npm//vega-embed@3.0"></script>
 </head>
 <body>
-
     <header class="showcase">
     <div class="showcase-top">
         <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
         <a href="{% url 'home_page_return' %}">Home</a>
     </div>
         <div class="showcase-content">
-            <h3>{{ country }}</h3>
+            <h1 class="gradient-text">{{ country }}</h1>
+        </div>
             <div class="information_map">
-                <img src="../static/images/countries/{{ chart }}" alt="" align="left" width="450" height="400">
+                <img src="../static/images/countries/{{ chart }}" alt="{{ country }}" class="country_map">
             </div>
+        <div class="showcase-content" id="information_text">
             <div class="information_text">
                 <h4>Current Legacy status</h4>
                 <p>{{ legality }}</p>
-                <h4>Predicted status as national currency</h4>
+                {% if legal_currency %}
+                    <h4>National currency</h4>
+                    <p>Bitcoin was legalized as national currency in {{ date }}</p>
+                {% else %}
+                    <h4>Predicted status as national currency</h4>
+                    <p>According to research of CoinMarketCap {{ votes }} people upvoted for legalization Bitcoin as national currency.
+                    <br>{{ country }} ranks {{ number }} in this ranking  at the moment</br>
+                    </p>
+                {% endif %}
+                {% if legality != "Unknown" or legality != "Illegal" %}
+                    <h4>Popular crypto in {{ country }}</h4>
+                    <img src="../static/images/pie_crypto_charts/{{ chart }}" alt="{{ country }}" class="crypto_stat">
+                {% endif %}
             </div>
             {% if country == "Ukraine" %}
-
+                <h4 class="get_places">Now you can discovered on map offline places in {{ country }} where you currently can pay with crypto</h4>
+                <button class="glow-on-hover">Get places</button>
             {% endif %}
         </div>
+        <section>
+        <div class="footer">
+                <p>Questions? <a href="mailto:secondchance850@gmail.com">Email </a>us!</p>
+                <div class="footer-cols">
+                    <ul>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Team</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Media Centre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </header>
-    <footer class="footer">
-        <p>Questions? Call 000-800-040-1843</p>
-        <div class="footer-cols">
-            <ul>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Investor Relations</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Speed Test</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Help Centre</a></li>
-                <li><a href="#">Jobs</a></li>
-                <li><a href="#">Cookie Preferences</a></li>
-                <li><a href="#">Watch for Free</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Ways to Watch</a></li>
-                <li><a href="#">Corporate Information</a></li>
-                <li><a href="#">Legal Notices</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Media Centre</a></li>
-                <li><a href="#">Terms of Use</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </div>
-    </footer>
 </body>
 </html>

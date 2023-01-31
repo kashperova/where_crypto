@@ -14,18 +14,19 @@
         <a href="{% url 'home_page_return' %}">Home</a>
     </div>
         <div class="showcase-content">
-            <h1>There are countries of crypto-future</h1>
+            <h1 class="gradient-text">There are countries of crypto-future</h1>
             <img src="{% static 'images/world_map.png' %}" alt="">
             <div class="country">
                 {% if unknown_country %}
                     <h3>You enter unknown country - {{ value }}</h3>
                 {% else %}
-                    <h3>Do you see necessary country on this map? Enter it here</h3>
+                    <h3>Do you see necessary country on this map? Enter it below</h3>
                 {% endif %}
                 <form method="get" action="{% url 'search' %}">
                     <input type="text" placeholder="Your country here" name="search_country" id="search_country">
-                     <button class="btn">Submit
+                    <br><button class="glow-on-hover">Search
                      </button>
+                    </br>
                 </form>
             </div>
         </div>

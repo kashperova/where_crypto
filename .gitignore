@@ -1,6 +1,7 @@
-venv
-node_modules
-package.json
-package-lock.json
-.idea
-__pycache__
+/venv
+/node_modules
+/package.json
+/package-lock.json
+/.idea
+/__pycache__
+/geckodriver.log
