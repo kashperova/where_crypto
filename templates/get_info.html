@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhereCrypto</title>
+    {% load static %}
+    <link rel= "stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+<script src="https://cdn.jsdelivr.net/npm//vega@3.2"></script>
+<script src="https://cdn.jsdelivr.net/npm//vega-lite@2.4.1"></script>
+<script src="https://cdn.jsdelivr.net/npm//vega-embed@3.0"></script>
+</head>
+<body>
+    <header class="showcase">
+    <div class="showcase-top">
+        <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
+        <a href="{% url 'home_page_return' %}">Home</a>
+    </div>
+        <div class="showcase-content">
+            <h1 class="gradient-text">{{ country }}</h1>
+        </div>
+            <div class="information_map">
+                <img src="../static/images/countries/{{ chart }}" alt="{{ country }}" class="country_map">
+            </div>
+        <div class="showcase-content" id="information_text">
+            <div class="information_text">
+                <h4>Current Legacy status</h4>
+                <p>{{ legality }}</p>
+                {% if legal_currency %}
+                    <h4>National currency</h4>
+                    <p>Bitcoin was legalized as national currency in {{ date }}</p>
+                {% else %}
+                    <h4>Predicted status as national currency</h4>
+                    <p>According to research of CoinMarketCap {{ votes }} people upvoted for legalization Bitcoin as national currency.
+                    <br>{{ country }} ranks {{ number }} in this ranking  at the moment</br>
+                    </p>
+                {% endif %}
+                {% if legality != "Unknown" or legality != "Illegal" %}
+                    <h4>Popular crypto in {{ country }}</h4>
+                    <img src="../static/images/pie_crypto_charts/{{ chart }}" alt="{{ country }}" class="crypto_stat">
+                {% endif %}
+            </div>
+            {% if country == "Ukraine" %}
+                <h4 class="get_places">Now you can discovered on map offline places in {{ country }} where you currently can pay with crypto</h4>
+                <form method="get" action="{% url 'get_map' %}">
+                    <button class="glow-on-hover">Get places</button>
+                </form>
+            {% endif %}
+        </div>
+        <section>
+        <div class="footer">
+                <p>Questions? <a href="mailto:secondchance850@gmail.com">Email </a>us!</p>
+                <div class="footer-cols">
+                    <ul>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Team</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Media Centre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </header>
+</body>
+</html>

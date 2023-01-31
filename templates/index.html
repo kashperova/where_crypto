@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhereCrypto</title>
+    {% load static %}
+    <link rel= "stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+</head>
+<body>
+    <header class="showcase">
+    <div class="showcase-top">
+        <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
+        <a href="{% url 'home_page_return' %}">Home</a>
+    </div>
+        <div class="showcase-content">
+            <h1 class="gradient-text">There are countries of crypto-future</h1>
+            <img src="{% static 'images/world_map.png' %}" alt="">
+            <div class="country">
+                {% if unknown_country %}
+                    <h3>You enter unknown country - {{ value }}</h3>
+                {% else %}
+                    <h3>Do you see necessary country on this map? Enter it below</h3>
+                {% endif %}
+                <form method="get" action="{% url 'search' %}">
+                    <input type="text" placeholder="Your country here" name="search_country" id="search_country">
+                    <br><button class="glow-on-hover">Search
+                     </button>
+                    </br>
+                </form>
+            </div>
+        </div>
+            <section>
+        <div class="footer">
+                <p>Questions? <a href="mailto:secondchance850@gmail.com">Email </a>us!</p>
+                <div class="footer-cols">
+                    <ul>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Team</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Media Centre</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </header>
+</body>
+</html>
+
+
+
