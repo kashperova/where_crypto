@@ -6,7 +6,7 @@ import pycountry
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from data.countries import all_countries_code_name, all_countries_off_name, all_countries_name, countries_dfrm
-from data.crypto_map import merge
+from data.crypto_map import status_by_country
 from data.legal_statistics import dfrm_legal, dfrm_predicted
 # from data.ukraine_map import ukraine_map
 import altair_saver
@@ -63,7 +63,7 @@ def home_page_return(request):
 
 def prepare_text(country):
     chart = str(country) + '.png'
-    legality = str(merge[(merge["Country or territory"] == country)].Legality.values[0])
+    legality = str(status_by_country[(status_by_country["Country or territory"] == country)].Legality.values[0])
     legal_currency_countries = list(dfrm_legal.name.values)
     legal_currency = False
     date = ""
@@ -142,4 +142,5 @@ def search(request):
                     search_result.append(str(country.flag) + "  " + str(country.alpha_3) + " - " + str(country.name))
         return render(request, 'search.html', {'names': set(search_result)})
     return render(request, 'index.html', {"unknown_country": True, "value": country})
+
 
