@@ -1,4 +1,4 @@
-![img.png](static/images/logo.png)
+![img.png](static/images/logo_black.png)
 # WhereCrypto Project
 #### Project was prepared by student's team for DES 2023 competition. 
 <br>Data for web-site was parsed from sites presented below. </br>
