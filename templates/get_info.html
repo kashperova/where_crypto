@@ -35,7 +35,8 @@
                     <br>{{ country }} ranks {{ number }} in this ranking  at the moment</br>
                     </p>
                 {% endif %}
-                {% if legality != "Unknown" or legality != "Illegal" %}
+                {% if legality == "Unknown" or legality == "Illegal"   %}
+                {% else %}
                     <h4>Popular crypto in {{ country }}</h4>
                     <img src="../static/images/pie_crypto_charts/{{ chart }}" alt="{{ country }}" class="crypto_stat">
                 {% endif %}
