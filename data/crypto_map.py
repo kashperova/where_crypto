@@ -91,6 +91,7 @@ for i in range(len(country_list)):
 misssed_countires = []
 misssed_countires = list(set(all_countries) - set(country_list))
 
+
 status_by_country['Country or territory'] = country_list
 unknown_countires = {"Country or territory": misssed_countires,
                      "Legality": ["Unknown" for i in range(len(misssed_countires))]}
