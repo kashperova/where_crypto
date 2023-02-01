@@ -6,7 +6,7 @@ import pycountry
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from data.countries import all_countries_code_name, all_countries_off_name, all_countries_name, countries_dfrm
-from data.crypto_map import merge
+from data.crypto_map import status_by_country
 from data.legal_statistics import dfrm_legal, dfrm_predicted
 # from data.ukraine_map import ukraine_map
 import altair_saver
@@ -63,7 +63,7 @@ def home_page_return(request):
 
 def prepare_text(country):
     chart = str(country) + '.png'
-    legality = str(merge[(merge["Country or territory"] == country)].Legality.values[0])
+    legality = str(status_by_country[(status_by_country["Country or territory"] == country)].Legality.values[0])
     legal_currency_countries = list(dfrm_legal.name.values)
     legal_currency = False
     date = ""
@@ -104,21 +104,23 @@ def search(request):
     name_suitable = []
     off_name_suitable = []
 
-    if (country in all_countries_code_name) or (country in all_countries_name)\
-            or (country in all_countries_off_name):
+    if (country.lower() in all_countries_code_name) or (country.lower() in all_countries_name)\
+            or (country.lower() in all_countries_off_name):
+        country = country.lower()
+        country = country[0].upper() + country[1:]
         chart, legality, legal_currency, date, votes, number = prepare_text(country)
         return render(request, 'get_info.html', {'chart': chart, 'legality': legality, 'country': country,
                                                  'legal_currency': legal_currency, 'date': date,
                                                  'votes': votes, 'number': number})
 
     for i in all_countries_code_name:
-        if i.startswith(country):
+        if i.startswith(country.lower()):
             code_suitable.append(i)
     for i in all_countries_name:
-        if i.startswith(country):
+        if i.startswith(country.lower()):
             name_suitable.append(i)
     for i in all_countries_off_name:
-        if i.startswith(country):
+        if i.startswith(country.lower()):
             off_name_suitable.append(i)
 
     if code_suitable or name_suitable or off_name_suitable:
@@ -131,6 +133,7 @@ def search(request):
         joined_dfrm = pd.concat([joined_dfrm, off_names], axis=0, ignore_index=True)
 
         selected_countries = list(joined_dfrm["name"].values)
+        selected_countries = [i[0].upper() + i[1:] for i in selected_countries]
         countries = pycountry.countries
         search_result = []
         for country in countries:

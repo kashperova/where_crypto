@@ -17,7 +17,13 @@ for country in cnts:
     all_countries_code_name.append(country.alpha_3)
     all_countries_flag.append(country.flag)
 
+
 all_countries_off_name = list(map(lambda x: x.replace('Czechia', 'Czech Republic'), all_countries_off_name))
+
+all_countries_code_name = [i.lower() for i in all_countries_code_name]
+all_countries_name = [i.lower() for i in all_countries_name]
+all_countries_off_name = [i.lower() for i in all_countries_off_name]
+
 countries_dict = {"code": all_countries_code_name,
                   "official_name": all_countries_off_name,
                   "name": all_countries_name}
