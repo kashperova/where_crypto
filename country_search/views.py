@@ -28,12 +28,10 @@ def get_ukraine_map(request):
     locations = pd.read_sql('SELECT * FROM locations', conn)
     locations = locations.drop("index", axis=1)
 
-    geometry = [Point(xy) for xy in zip(locations["lat"], locations["lon"])]
+    geometry = [Point(xy) for xy in zip(locations["lat"], locations["lng"])]
 
     crs = {'init': 'epsg:4326'}
     geo_df_places = gpd.GeoDataFrame(locations, crs=crs, geometry=geometry)
-
-    geo_df_places.columns = ['Company', 'Category', 'lat', 'lon', 'geometry']
 
     points = []
 
@@ -44,9 +42,8 @@ def get_ukraine_map(request):
 
     # add a markers
     for index in range(len(points)):
-        folium.Marker(points[index], popup="Company: " + geo_df_places.loc[index]["Company"]
-                                           + "\n" + "Category: " + geo_df_places.loc[index]["Category"]).add_to(
-            ukraine_map)
+        folium.Marker(points[index], popup="Company: " + geo_df_places.loc[index]["company"]
+                                           + "\n" + "Category: " + geo_df_places.loc[index]["category"]).add_to(ukraine_map)
 
     map = ukraine_map._repr_html_()
     context = {'map': map}
@@ -88,7 +85,7 @@ def prepare_text(country):
 
 def get_info(request):
     country = request.GET.get('selected_country', 0)
-    country = country[10:]
+    country = country[4:]
     chart, legality, legal_currency, date, votes, number = prepare_text(country)
     return render(request, 'get_info.html', {'chart': chart, 'legality': legality, 'country': country,
                                              'legal_currency': legal_currency, 'date': date,
@@ -139,6 +136,6 @@ def search(request):
         for country in countries:
             for selected in selected_countries:
                 if country.name == selected:
-                    search_result.append(str(country.flag) + "  " + str(country.alpha_3) + " - " + str(country.name))
+                    search_result.append(str(country.flag) + "  " + str(country.name))
         return render(request, 'search.html', {'names': set(search_result)})
     return render(request, 'index.html', {"unknown_country": True, "value": country})

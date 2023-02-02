@@ -103,7 +103,7 @@ status_by_country = pd.concat([status_by_country, df2], axis=0, ignore_index=Tru
 
 status_by_country.at[69, 'Legality'] = "Illegal"
 status_by_country.at[66, 'Legality'] = "Illegal"
-
+#
 # status_by_country['Legality'].replace(['Legal / Banking ban',
 #        'Legal / Use discouraged by central bank',
 #        'Not considered currency', 'Not regulated',
@@ -111,6 +111,8 @@ status_by_country.at[66, 'Legality'] = "Illegal"
 #        'Ban on mining', 'Legal / Illegal to buy with local currency'],
 #                                  "Legal", inplace=True)
 
+
+status_by_country['Legality'].replace(['Unknown'], "No data", inplace=True)
 
 world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
 world.columns = ['pop_est', 'continent', 'name', 'CODE', 'gdp_md_est', 'geometry']
