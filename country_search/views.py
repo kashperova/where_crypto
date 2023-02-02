@@ -93,10 +93,9 @@ def get_info(request):
 
 
 def search(request):
-    country = request.GET.get('search_country', 0)
-    if country == 0:
-        return render(request, 'index.html', {"unknown_country": True, "value": "None"})
-
+    t = request.GET.get('search_country')
+    t = t.rstrip('+')
+    country = t.rstrip(' ')
     code_suitable = []
     name_suitable = []
     off_name_suitable = []
@@ -109,7 +108,6 @@ def search(request):
         return render(request, 'get_info.html', {'chart': chart, 'legality': legality, 'country': country,
                                                  'legal_currency': legal_currency, 'date': date,
                                                  'votes': votes, 'number': number})
-
     for i in all_countries_code_name:
         if i.startswith(country.lower()):
             code_suitable.append(i)
@@ -138,6 +136,7 @@ def search(request):
                 if country.name == selected:
                     search_result.append(str(country.flag) + "  " + str(country.name))
         return render(request, 'search.html', {'names': set(search_result)})
+
     return render(request, 'index.html', {"unknown_country": True, "value": country})
 
 
