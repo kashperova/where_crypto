@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhereCrypto</title>
     {% load static %}
+    <link rel="icon" href="{% static 'images/logomark.png' %}">
     <link rel= "stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+    <link rel= "stylesheet" type="text/css" href="{% static 'style/footerchoose.css' %}">
+    
 </head>
 <body>
     <header class="showcase">
     <div class="showcase-top">
         <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
-        <a href="{% url 'home_page_return' %}">Home</a>
+        <a class="home" href="{% url 'home_page_return' %}">Home</a>
     </div>
+    <section>
         <div class="showcase-content">
             <h3>Choose from these countries</h3>
             <div class="search">
@@ -24,32 +28,16 @@
                 {% csrf_token %}
                     {% for i in names %}
                           <tr>
-                            <td><button name="selected_country" value="{{ i }}">{{ i }} </button></td>
+                            <td><button name="selected_country" class="chooseop" value="{{ i }}">{{ i }} </button></td>
                           </tr>
                     {% endfor %}
                 </form>
                 </table>
             </div>
         </div>
-            <section>
-        <div class="footer">
-                <p>Questions? <a href="mailto:secondchance850@gmail.com">Email </a>us!</p>
-                <div class="footer-cols">
-                    <ul>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Team</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Account</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Media Centre</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </header>
+    </section>
+   
+    
+</header>
 </body>
 </html>

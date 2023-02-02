@@ -5,50 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhereCrypto</title>
     {% load static %}
+    <link rel="icon" href="{% static 'images/logomark.png' %}">
     <link rel= "stylesheet" type="text/css" href="{% static 'style/style.css' %}">
+    <script src="enter.js"></script>
 </head>
 <body>
     <header class="showcase">
     <div class="showcase-top">
         <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
-        <a href="{% url 'home_page_return' %}">Home</a>
+        <a class="home" href="{% url 'home_page_return' %}">Home</a>
     </div>
         <div class="showcase-content">
-            <h1 class="gradient-text">There are countries of crypto-future</h1>
+            <h1>There are countries of <span class="gradient-text">crypto-future</span> here</h1>
             <img src="{% static 'images/world_map.png' %}" alt="">
-            <div class="country">
-                {% if unknown_country %}
+            {% if unknown_country %}
                     <h3>You enter unknown country - {{ value }}</h3>
                 {% else %}
-                    <h3>Do you see necessary country on this map? Enter it below</h3>
+                    <h3>See your country on this map? Enter it here</h3>
                 {% endif %}
-                <form method="get" action="{% url 'search' %}">
-                    <input type="text" placeholder="Your country here" name="search_country" id="search_country">
-                    <br><button class="glow-on-hover">Search
-                     </button>
-                    </br>
-                </form>
+            <form method="get" action="{% url 'search' %}">
+            <div class="countrytext">
+                <input type="text" placeholder="Your country here" name="search_country" id="search_country" autofocus="autofocus">
+                <button class="btn">Search</button>
+            </div>
+            </form>
+            <div class="countrytextmobile">
+                
+                <input type="text" placeholder="Your country here" autofocus="autofocus">
+                <button>Search</button>
+
             </div>
         </div>
-            <section>
-        <div class="footer">
-                <p>Questions? <a href="mailto:secondchance850@gmail.com">Email </a>us!</p>
-                <div class="footer-cols">
-                    <ul>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Team</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Account</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Media Centre</a></li>
-                    </ul>
+            
+    <section class="style-cards" >
+        <div class="card-1">
+            <div class="desc-1">
+                <h1>Track the popularity!</h1>
+                <h3>WhereCrypto shows the rank list of cryptocurrencies based on their usability and
+                    performance in the chosen country. With our service, users can quickly find the best
+                    suggestions on where to spend the crypto.
+                </h3>
+            </div>
+            <img src="{% static 'images/earth.png' %}" alt="Smth">
+        </div>
+        <div class="card-2">
+            
+            <div class="desc-2">
+                <h1>Visualize dreams!</h1>
+                <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur iusto error velit consectetur excepturi doloremque inventore vero dicta! Ipsum delectus dolores quibusdam alias error lauda</h3>
+            </div>
+            <img src="{% static 'images/cup.png' %}" alt="Smth">
+        </div>
+        
+    </section>
+    <section class="redirectsec">
+        
+        <div class="redirect">
+            <div class="redirecttxt">
+                <h1>Ready for searching?</h1>
+                <h3>Just press the button and type your desided country!</h3></div>
+                
+                <div class="space"></div>
+                <a class="btn2" href="#">Get Started!</a>
+            </div>
+            
+        
+    </section>
+        </div>
+        <footer class="footer">
+            <div class="footer-left">
+                <img src="{% static 'images/logo.png' %}" alt="logowhite">
+                <p>"There are countries of crypto-future here"</p>
+                <div class="socials">
+                    <a href="#"></a>
                 </div>
             </div>
-        </section>
+            <ul class="footer-right">
+                <li>
+                    <h2>Contacts</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="https://t.me/WhereCryptoBot" target="_blank">Telegram</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Usefull links</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="">Something</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Adress</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="">Something</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="footer-bottom">
+                <p>&#169; WhereCrypto. Created by The Beatles for DES 2023 competition.</p>
+            </div>
+        </footer>
+        
     </header>
 </body>
 </html>

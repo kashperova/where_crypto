@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhereCrypto</title>
     {% load static %}
+    <link rel="icon" href="{% static 'images/logomark.png' %}">
     <link rel= "stylesheet" type="text/css" href="{% static 'style/style.css' %}">
 <script src="https://cdn.jsdelivr.net/npm//vega@3.2"></script>
 <script src="https://cdn.jsdelivr.net/npm//vega-lite@2.4.1"></script>
@@ -14,7 +15,7 @@
     <header class="showcase">
     <div class="showcase-top">
         <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
-        <a href="{% url 'home_page_return' %}">Home</a>
+        <a class="home" href="{% url 'home_page_return' %}">Home</a>
     </div>
         <div class="showcase-content">
             <h1 class="gradient-text">{{ country }}</h1>
@@ -28,7 +29,7 @@
                 <p>{{ legality }}</p>
                 {% if legal_currency %}
                     <h4>National currency</h4>
-                    <p>Bitcoin was legalized as national currency in {{ date }}</p>
+                    <p>Bitcoin was legalized as a national currency in {{ date }}</p>
                 {% else %}
                     <h4>Predicted status as national currency</h4>
                     <p>According to research of CoinMarketCap {{ votes }} people upvoted for legalization Bitcoin as national currency.
@@ -41,32 +42,55 @@
                     <img src="../static/images/pie_crypto_charts/{{ chart }}" alt="{{ country }}" class="crypto_stat">
                 {% endif %}
             </div>
-            {% if country == "Ukraine" %}
-                <h4 class="get_places">Now you can discovered on map offline places in {{ country }} where you currently can pay with crypto</h4>
-                <form method="get" action="{% url 'get_map' %}">
-                    <button class="glow-on-hover">Get places</button>
-                </form>
-            {% endif %}
+            
         </div>
-        <section>
-        <div class="footer">
-                <p>Questions? <a href="mailto:secondchance850@gmail.com">Email </a>us!</p>
-                <div class="footer-cols">
-                    <ul>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Team</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Account</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Media Centre</a></li>
-                    </ul>
-                </div>
+        <section class="redirectsec">
+        
+            <div class="redirect">
+                {% if country == "Ukraine" %}
+                <h4 class="get_places">Now you can discover on a map suggestions where you currently can spend crypto in {{ country }}.</h4>
+                <div class="space2"></div>
+                <form method="get" action="{% url 'get_map' %}">
+                <button class="btn2">Discover</button>
+                </form>
+                {% endif %}
             </div>
         </section>
+        <footer class="footer">
+            <div class="footer-left">
+                <img src="{% static 'images/logo.png' %}" alt="logowhite">
+                <p>"There are countries of crypto-future here"</p>
+                <div class="socials">
+                    <a href="#"></a>
+                </div>
+            </div>
+            <ul class="footer-right">
+                <li>
+                    <h2>Contacts</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="https://t.me/WhereCryptoBot" target="_blank">Telegram</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Usefull links</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="">Something</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Adress</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="">Something</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="footer-bottom">
+                <p>&#169; WhereCrypto. Created by The Beatles for DES 2023 competition.</p>
+            </div>
+        </footer>
     </header>
 </body>
 </html>

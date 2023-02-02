@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhereCrypto</title>
     {% load static %}
+    <link rel="icon" href="{% static 'images/logomark.png' %}">
     <link rel= "stylesheet" type="text/css" href="{% static 'style/style.css' %}">
 <script src="https://cdn.jsdelivr.net/npm//vega@3.2"></script>
 <script src="https://cdn.jsdelivr.net/npm//vega-lite@2.4.1"></script>
@@ -14,31 +15,47 @@
     <header class="showcase">
     <div class="showcase-top">
         <img src="{% static 'images/logo.png' %}" alt="WhereCrypto Logo" class="logo">
-        <a href="{% url 'home_page_return' %}">Home</a>
+        <a class="home" href="{% url 'home_page_return' %}">Home</a>
     </div>
         <div class="showcase-content">
             <h1 class="gradient-text">Map</h1>
             {{map|safe}}
         </div>
-        <section>
-        <div class="footer">
-                <p>Questions? <a href="mailto:secondchance850@gmail.com">Email </a>us!</p>
-                <div class="footer-cols">
-                    <ul>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Team</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Account</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">Media Centre</a></li>
-                    </ul>
+        <footer class="footer">
+            <div class="footer-left">
+                <img src="{% static 'images/logo.png' %}" alt="logowhite">
+                <p>"There are countries of crypto-future here"</p>
+                <div class="socials">
+                    <a href="#"></a>
                 </div>
             </div>
-        </section>
-    </header>
+            <ul class="footer-right">
+                <li>
+                    <h2>Contacts</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="https://t.me/WhereCryptoBot" target="_blank">Telegram</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Usefull links</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="">Something</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Adress</h2>
+
+                    <ul class="box">
+                        <li><a class="home" href="">Something</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="footer-bottom">
+                <p>&#169; WhereCrypto. Created by The Beatles for DES 2023 competition.</p>
+            </div>
+        </footer>
+        
 </body>
 </html>
