@@ -45,16 +45,15 @@
             
         </div>
         <section class="redirectsec">
-        
+            {% if country == "Ukraine" %}
             <div class="redirect">
-                {% if country == "Ukraine" %}
                 <h4 class="get_places">Now you can discover on a map suggestions where you currently can spend crypto in {{ country }}.</h4>
                 <div class="space2"></div>
                 <form method="get" action="{% url 'get_map' %}">
                 <button class="btn2">Discover</button>
                 </form>
-                {% endif %}
             </div>
+            {% endif %}
         </section>
         <footer class="footer">
             <div class="footer-left">
