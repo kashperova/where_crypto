@@ -8,17 +8,14 @@
 ## Description
 <br>WhereCrypto is a website for searching by country where, how and exactly what you can buy with crypto.</br>
 <br>Also, this service will show the statistics of the crypto's popularity by country and whether it is allowed as a currency at all.</br>
-<br>As test example for competition presentation we create Ukraine map with markers of 5 places for each company that currently allows use crypto as payment. </br>
+<br>As test example for competition presentation we create Ukraine map with markers of places for each company that currently allows use crypto as payment. For parsing locations we use Google Maps API. </br>
 <br><b>Libraries for data visualization: </b>Altair, Matplotlib</br>
 <br><b>Libraries for data processing: </b>  Pandas, Numpy, Folium </br>
 <br><b>Python frameworks: </b>  Django</br>
 <br><b>Database: </b>  SQLite</br>
 
-## Screenshots
-<br>Below are a few screenshots of the web application view, as well as instructions for launching.<br>
-<br>Main view of WhereCrypto web-site</br>
-<br></br><br>Example of country search</br>
-<br></br><br>Map for searching places where you can pay with crypto</br>
+## Web-site
+<br>Discover our project now - https://wherecrypto.up.railway.app/ <br>
 <br></br>
 ## Guide how to run and test project
 1. Clone this repository from github. 
