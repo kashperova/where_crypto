@@ -30,6 +30,7 @@ countries_dict = {"code": all_countries_code_name,
 
 countries_dfrm = pd.DataFrame.from_dict(countries_dict)
 
+
 # conn = sqlite3.connect('../database.db')
 # c = conn.cursor()
 # c.execute('''CREATE TABLE countries (code text, official_name text, name text)''')

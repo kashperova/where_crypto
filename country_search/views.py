@@ -15,7 +15,7 @@ from shapely.geometry import Point, Polygon
 import geopandas as gpd
 import geopy.distance
 import os.path
-
+import string
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(BASE_DIR, "../database.db")
@@ -68,7 +68,7 @@ def prepare_text(country):
     number = 0
     if country in legal_currency_countries:
         legal_currency = True
-        date = str(dfrm_legal[dfrm_legal.name == country].time)
+        date = str(dfrm_legal[dfrm_legal.name == country].time.values[0])
     else:
         votes = int(dfrm_predicted[dfrm_predicted.name == country].voteAmount)
         number = int(dfrm_predicted[dfrm_predicted.name == country].index[0])+1
@@ -93,18 +93,34 @@ def get_info(request):
 
 
 def search(request):
-    t = request.GET.get('search_country')
-    t = t.rstrip('+')
+    t = request.GET.get('search_country', 0)
+    if t == 0:
+        return render(request, 'index.html', {"unknown_country": True, "value": t})
     t = t.lstrip(' ')
     country = t.rstrip(' ')
     code_suitable = []
     name_suitable = []
     off_name_suitable = []
 
-    if (country.lower() in all_countries_code_name) or (country.lower() in all_countries_name)\
-            or (country.lower() in all_countries_off_name):
+    if country.lower() in all_countries_code_name:
+        country = pycountry.countries.lookup(country.upper()).name
+        chart, legality, legal_currency, date, votes, number = prepare_text(country)
+        return render(request, 'get_info.html', {'chart': chart, 'legality': legality, 'country': country,
+                                                 'legal_currency': legal_currency, 'date': date,
+                                                 'votes': votes, 'number': number})
+    elif country.lower() in all_countries_name:
         country = country.lower()
-        country = country[0].upper() + country[1:]
+        country = string.capwords(country)
+        # country = country[0].upper() + country[1:]
+        chart, legality, legal_currency, date, votes, number = prepare_text(country)
+        return render(request, 'get_info.html', {'chart': chart, 'legality': legality, 'country': country,
+                                                 'legal_currency': legal_currency, 'date': date,
+                                                 'votes': votes, 'number': number})
+    elif country.lower() in all_countries_off_name:
+        country = country.lower()
+        # country = country[0].upper() + country[1:]
+        country = string.capwords(country)
+
         chart, legality, legal_currency, date, votes, number = prepare_text(country)
         return render(request, 'get_info.html', {'chart': chart, 'legality': legality, 'country': country,
                                                  'legal_currency': legal_currency, 'date': date,
@@ -129,13 +145,13 @@ def search(request):
         joined_dfrm = pd.concat([joined_dfrm, off_names], axis=0, ignore_index=True)
 
         selected_countries = list(joined_dfrm["name"].values)
-        selected_countries = [i[0].upper() + i[1:] for i in selected_countries]
+        selected_countries = [string.capwords(i) for i in selected_countries]
         countries = pycountry.countries
         search_result = []
-        for country in countries:
+        for cntry in countries:
             for selected in selected_countries:
-                if country.name == selected:
-                    search_result.append(str(country.flag) + "  " + str(country.name))
+                if cntry.name == selected:
+                    search_result.append(str(cntry.flag) + "  " + str(cntry.name))
         return render(request, 'search.html', {'names': set(search_result)})
 
     return render(request, 'index.html', {"unknown_country": True, "value": country})
