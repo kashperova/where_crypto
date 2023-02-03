@@ -95,6 +95,7 @@ def get_info(request):
 def search(request):
     t = request.GET.get('search_country')
     t = t.rstrip('+')
+    t = t.lstrip(' ')
     country = t.rstrip(' ')
     code_suitable = []
     name_suitable = []
